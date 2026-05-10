@@ -1,0 +1,413 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2022.7">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}
+    p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 14.0px}
+    p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px 'PingFang SC'}
+    span.s1 {font: 12.0px 'PingFang SC'}
+    span.s2 {font: 12.0px Helvetica}
+    span.s3 {font: 12.0px 'Lucida Grande'}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="zh-CN"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;title&gt;BLADEFUNNER&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ================= <span class="s1">核心重置与</span> Apple <span class="s1">风格设计变量</span> ================= */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>:root {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--bg-color: #fbfbfd;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--text-main: #1d1d1f;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--text-muted: #86868b;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--apple-blue: #0066cc;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--apple-blue-hover: #0077ed;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--nav-bg: rgba(251, 251, 253, 0.8);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--card-bg: #ffffff;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--border-radius: 18px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>--shadow: 0 4px 24px rgba(0,0,0,0.06);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>* { margin: 0; padding: 0; box-sizing: border-box; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background-color: var(--bg-color);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: var(--text-main);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>line-height: 1.5;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>-webkit-font-smoothing: antialiased;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ================= <span class="s1">导航栏</span> ================= */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>nav {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: fixed;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>top: 0; width: 100%; height: 50px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: var(--nav-bg);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>backdrop-filter: blur(12px); /* <span class="s1">毛玻璃效果</span> */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>-webkit-backdrop-filter: blur(12px);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex; justify-content: center; align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>border-bottom: 1px solid rgba(0,0,0,0.05);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>z-index: 1000;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>width: 100%; max-width: 980px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex; justify-content: space-between; padding: 0 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.logo { font-weight: 700; letter-spacing: 1px; cursor: pointer; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav-links { display: flex; gap: 30px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav-links a {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-decoration: none; color: var(--text-main); font-size: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>letter-spacing: -0.01em; opacity: 0.8; transition: opacity 0.3s;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.nav-links a:hover { opacity: 1; color: var(--apple-blue); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ================= <span class="s1">页面视图容器</span> ================= */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.view-section {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: none; /* <span class="s1">默认隐藏所有，</span>JS<span class="s1">控制显示</span> */</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding-top: 80px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>min-height: 100vh;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 980px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>margin: 0 auto;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding-bottom: 100px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>animation: fadeIn 0.4s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.view-section.active { display: block; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>@keyframes fadeIn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>from { opacity: 0; transform: translateY(10px); }</p>
+<p class="p1"><span class="Apple-converted-space">            </span>to { opacity: 1; transform: translateY(0); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ================= <span class="s1">首页</span> (Home) ================= */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hero { text-align: center; margin-top: 100px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hero h1 { font-size: 56px; font-weight: 600; letter-spacing: -0.005em; margin-bottom: 20px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.hero p { font-size: 24px; color: var(--text-muted); font-weight: 400; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ================= <span class="s1">探索页</span> (Explore) ================= */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.section-title { font-size: 40px; font-weight: 600; margin: 40px 20px 30px; text-align: center; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.grid-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; padding: 0 20px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: var(--card-bg); border-radius: var(--border-radius); padding: 40px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>text-align: center; box-shadow: var(--shadow); cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>transition: transform 0.3s ease, box-shadow 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card:hover { transform: scale(1.02); box-shadow: 0 10px 40px rgba(0,0,0,0.1); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card h3 { font-size: 24px; margin-bottom: 10px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.card p { color: var(--text-muted); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* ================= <span class="s1">学习主界面</span> (<span class="s1">阅读器</span> + <span class="s1">音频</span>) ================= */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.learning-container {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: flex; gap: 30px; padding: 0 20px; margin-top: 20px; flex-wrap: wrap;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.script-area {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 2; background: var(--card-bg); border-radius: var(--border-radius);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 40px; box-shadow: var(--shadow); min-width: 300px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: relative; font-size: 18px; line-height: 1.8;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.script-area h2 { font-size: 24px; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px;}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.script-text p { margin-bottom: 15px; cursor: text; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.sidebar {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>flex: 1; display: flex; flex-direction: column; gap: 20px; min-width: 300px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* <span class="s1">音频与练习模块</span> */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.audio-player, .vocab-book {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: var(--card-bg); border-radius: var(--border-radius);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 30px; box-shadow: var(--shadow);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.audio-player h3, .vocab-book h3 { margin-bottom: 15px; font-size: 18px; }</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn-group { display: flex; gap: 10px; margin-top: 15px; flex-wrap: wrap; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: var(--apple-blue); color: white; border: none;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px 16px; border-radius: 20px; font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>cursor: pointer; transition: background 0.2s;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn:hover { background: var(--apple-blue-hover); }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn-outline {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>background: transparent; color: var(--apple-blue); border: 1px solid var(--apple-blue);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.btn-outline:hover { background: var(--apple-blue); color: white; }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* <span class="s1">模拟上传按钮</span> */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.upload-btn-wrapper { position: relative; overflow: hidden; display: inline-block; margin-bottom: 15px; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.upload-btn-wrapper input[type=file] {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 100px; position: absolute; left: 0; top: 0; opacity: 0; cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* <span class="s1">划词翻译弹窗</span> (Tooltip) */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#tooltip {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>position: absolute; display: none; background: #333; color: white;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 10px 15px; border-radius: 8px; font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 100;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>max-width: 200px; pointer-events: auto;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#tooltip .add-vocab-btn {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>display: block; margin-top: 8px; background: var(--apple-blue);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>color: white; border: none; padding: 4px 8px; border-radius: 4px;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>font-size: 12px; cursor: pointer; width: 100%;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>/* <span class="s1">生词本列表</span> */</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#vocab-list { list-style: none; margin-top: 15px; max-height: 200px; overflow-y: auto; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#vocab-list li {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>padding: 8px 0; border-bottom: 1px solid #eee; display: flex; justify-content: space-between; font-size: 14px;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>#vocab-list li:last-child { border-bottom: none; }</p>
+<p class="p1"><span class="Apple-converted-space">        </span>.vocab-word { font-weight: 600; color: var(--apple-blue); }</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- <span class="s1">顶部导航栏</span> --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;nav&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="nav-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="logo" onclick="navigateTo('home')"&gt;BLADEFUNNER&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="nav-links"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a onclick="navigateTo('home')"&gt;WHATFUN&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;a onclick="navigateTo('explore')"&gt;EXPLORE&lt;/a&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/nav&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- <span class="s1">首页视图</span> --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;main id="home-view" class="view-section active"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="hero"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;h1&gt;Learn differently.&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;p&gt;Welcome to BLADEFUNNER. <span class="s1">探索语言的乐趣。</span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- <span class="s1">探索页视图</span> --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;main id="explore-view" class="view-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2 class="section-title"&gt;Explore Categories&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="grid-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card" onclick="navigateTo('english-scripts')"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3&gt;ENGLISH&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;<span class="s1">经典剧本跟读与词汇精讲</span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3&gt;JAPANESE&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;<span class="s1">即将推出</span> / Coming Soon&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- <span class="s1">剧本选择页</span> --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;main id="english-scripts-view" class="view-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;h2 class="section-title"&gt;Scripts Library&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="grid-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card" onclick="navigateTo('learning-app')"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3&gt;FRIENDS (<span class="s1">老友记</span>)&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;Season 1 - Episode 1: The One Where Monica Gets a Roommate&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="card"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h3&gt;THE BIG BANG THEORY&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;p&gt;<span class="s1">生活大爆炸经典台词库</span>&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-converted-space">    </span>&lt;!-- </span>核心学习界面<span class="s2"> (</span>阅读、听力、口语、生词本<span class="s2">) --&gt;</span></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;main id="learning-app-view" class="view-section"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;div class="learning-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- <span class="s1">左侧：剧本交互阅读区</span> --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="script-area" id="script-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;h2&gt;FRIENDS - S01E01&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="script-text"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;&lt;strong&gt;Monica:&lt;/strong&gt; There's nothing to tell! He's just some guy I work with!&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;&lt;strong&gt;Joey:&lt;/strong&gt; C'mon, you're going out with the guy! There's gotta be something wrong with him!&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;&lt;strong&gt;Chandler:&lt;/strong&gt; All right Joey, be nice. So does he have a hump? A hump and a hairpiece?&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;&lt;strong&gt;Phoebe:&lt;/strong&gt; Wait, does he eat chalk?&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;&lt;strong&gt;Ross:&lt;/strong&gt; (entering) Hi.&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;p&gt;&lt;em&gt;(Try selecting any English word above with your mouse to see the dictionary popup!)&lt;/em&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- <span class="s1">划词弹窗</span> --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div id="tooltip"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span id="tooltip-word"&gt;&lt;/span&gt;&lt;br&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;span id="tooltip-def" style="font-size: 12px; color: #ccc;"&gt;&lt;/span&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;button class="add-vocab-btn" onclick="addToVocab()"&gt;<span class="s1">加入生词本</span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;!-- <span class="s1">右侧：音频工具与生词本</span> --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;div class="sidebar"&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- <span class="s1">音频与口语模块</span> --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="audio-player"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;Listening &amp; Speaking&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="upload-btn-wrapper"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button class="btn btn-outline"&gt;<span class="s1">上传本地音频</span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;input type="file" id="audio-upload" accept="audio/*" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;audio id="player" controls style="width: 100%; margin-bottom: 15px; display:none;"&gt;&lt;/audio&gt;</p>
+<p class="p2"><span class="Apple-converted-space">                    </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="btn-group"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button class="btn"&gt;<span class="s1">单句练习</span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button class="btn"&gt;<span class="s1">模仿跟读</span> (<span class="s1">录音</span>)&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button class="btn btn-outline"&gt;<span class="s1">盲听测试</span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;!-- <span class="s1">类似</span>“<span class="s1">奶酪单词</span>”<span class="s1">的生词本模块</span> --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;div class="vocab-book"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;h3&gt;My Vocab (<span class="s1">生词本</span>)&lt;/h3&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;div class="btn-group" style="margin-bottom: 10px;"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button class="btn" style="font-size: 12px; padding: 6px 10px;"&gt;<span class="s1">巩固练习</span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;button class="btn btn-outline" style="font-size: 12px; padding: 6px 10px;" onclick="clearVocab()"&gt;<span class="s1">清空</span>&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;ul id="vocab-list"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                        </span>&lt;!-- JS <span class="s1">动态填充</span> --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/main&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;!-- <span class="s1">交互逻辑脚本</span> --&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">        </span>// === 1. <span class="s1">简单的</span> SPA <span class="s1">路由逻辑</span> ===</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function navigateTo(viewId) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// <span class="s1">隐藏所有视图</span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.querySelectorAll('.view-section').forEach(el =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>el.classList.remove('active');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// <span class="s1">显示目标视图</span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById(viewId + '-view').classList.add('active');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>window.scrollTo(0, 0);</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// === 2. <span class="s1">本地音频上传与播放逻辑</span> ===</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const audioUpload = document.getElementById('audio-upload');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const player = document.getElementById('player');</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>audioUpload.addEventListener('change', function(e) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const file = e.target.files[0];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (file) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const objectUrl = URL.createObjectURL(file);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>player.src = objectUrl;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>player.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// === 3. <span class="s1">划词翻译与生词本逻辑</span> ===</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const scriptContainer = document.getElementById('script-container');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const tooltip = document.getElementById('tooltip');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const tooltipWord = document.getElementById('tooltip-word');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const tooltipDef = document.getElementById('tooltip-def');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const vocabList = document.getElementById('vocab-list');</p>
+<p class="p2"><span class="Apple-converted-space">        </span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentSelectedWord = '';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentDefinition = '';</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-converted-space">        </span>// </span>模拟一个极其简单的本地词库<span class="s2"> (</span>实际应用中这里会调用<span class="s2">API)</span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>const mockDictionary = {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"hump": "n. <span class="s1">驼峰；隆起</span>",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"hairpiece": "n. <span class="s1">假发</span>",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"chalk": "n. <span class="s1">粉笔</span>",</p>
+<p class="p1"><span class="Apple-converted-space">            </span>"roommate": "n. <span class="s1">室友</span>"</p>
+<p class="p1"><span class="Apple-converted-space">        </span>};</p>
+<p class="p2"><br></p>
+<p class="p3"><span class="s2"><span class="Apple-converted-space">        </span>// </span>监听鼠标抬起事件，获取选中的文本</p>
+<p class="p1"><span class="Apple-converted-space">        </span>scriptContainer.addEventListener('mouseup', function(e) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const selection = window.getSelection();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const text = selection.toString().trim().toLowerCase().replace(/[^a-z]/g, ''); // <span class="s1">简单去标点</span></p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (text.length &gt; 1) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>currentSelectedWord = text;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// <span class="s1">获取释义（模拟）</span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>currentDefinition = mockDictionary[text] || "<span class="s1">暂无精确释义，请点击添加后自行完善。</span>";</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// <span class="s1">显示弹窗</span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>tooltipWord.textContent = text.toUpperCase();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tooltipDef.textContent = currentDefinition;</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>// <span class="s1">计算弹窗位置</span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const range = selection.getRangeAt(0);</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const rect = range.getBoundingClientRect();</p>
+<p class="p2"><span class="Apple-converted-space">                </span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>tooltip.style.display = 'block';</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tooltip.style.left = `${rect.left + window.scrollX}px`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tooltip.style.top = `${rect.top + window.scrollY - tooltip.offsetHeight - 10}px`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tooltip.style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// <span class="s1">点击空白处隐藏弹窗</span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>document.addEventListener('mousedown', function(e) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!tooltip.contains(e.target) &amp;&amp; e.target.id !== 'script-container') {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>tooltip.style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// <span class="s1">生词本管理</span> (<span class="s1">利用</span> LocalStorage <span class="s1">保存数据，刷新不丢失</span>)</p>
+<p class="p1"><span class="Apple-converted-space">        </span>function loadVocab() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const saved = JSON.parse(localStorage.getItem('bladefunner_vocab')) || [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>vocabList.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(saved.length === 0) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>vocabList.innerHTML = '&lt;li style="color:#888;"&gt;<span class="s1">生词本空空如也，去划词添加吧！</span>&lt;/li&gt;';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">            </span>saved.forEach(item =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>const li = document.createElement('li');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>li.innerHTML = `&lt;span class="vocab-word"&gt;${item.word}&lt;/span&gt; &lt;span&gt;${item.def.substring(0, 8)}...&lt;/span&gt;`;</p>
+<p class="p1"><span class="Apple-converted-space">                </span>vocabList.appendChild(li);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>});</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function addToVocab() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>let saved = JSON.parse(localStorage.getItem('bladefunner_vocab')) || [];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>// <span class="s1">查重</span></p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (!saved.some(item =&gt; item.word === currentSelectedWord)) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>saved.push({ word: currentSelectedWord, def: currentDefinition });</p>
+<p class="p1"><span class="Apple-converted-space">                </span>localStorage.setItem('bladefunner_vocab', JSON.stringify(saved));</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadVocab();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>// <span class="s1">提供反馈</span></p>
+<p class="p1"><span class="Apple-converted-space">                </span>const btn = tooltip.querySelector('.add-vocab-btn');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>btn.textContent = "<span class="s1">已添加</span> <span class="s3">✓</span>";</p>
+<p class="p1"><span class="Apple-converted-space">                </span>setTimeout(() =&gt; {<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>btn.textContent = "<span class="s1">加入生词本</span>";<span class="Apple-converted-space"> </span></p>
+<p class="p1"><span class="Apple-converted-space">                    </span>tooltip.style.display = 'none';</p>
+<p class="p1"><span class="Apple-converted-space">                    </span>window.getSelection().removeAllRanges();</p>
+<p class="p1"><span class="Apple-converted-space">                </span>}, 1000);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>alert('<span class="s1">该单词已经在生词本中啦！</span>');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function clearVocab() {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if(confirm("<span class="s1">确定要清空所有生词吗？</span>")) {</p>
+<p class="p1"><span class="Apple-converted-space">                </span>localStorage.removeItem('bladefunner_vocab');</p>
+<p class="p1"><span class="Apple-converted-space">                </span>loadVocab();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>// <span class="s1">页面加载时初始化生词本</span></p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.onload = loadVocab;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
