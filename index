@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLADEFUNNER - 沉浸式语言学习</title>
+    <style>
+        :root {
+            --bg-color: #f5f5f7;
+            --text-main: #1d1d1f;
+            --text-muted: #86868b;
+            --apple-blue: #0066cc;
+            --nav-bg: rgba(255, 255, 255, 0.8);
+            --card-bg: #fff;
+            --border-radius: 20px;
+            --shadow: 0 8px 30px rgba(0, 0, 0, 0.04);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-font-smoothing: antialiased; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed; top: 0; width: 100%; height: 48px;
+            background: var(--nav-bg); backdrop-filter: saturate(180%) blur(20px);
+            display: flex; justify-content: center; align-items: center;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08); z-index: 1000;
+        }
+
+        .nav-container { width: 100%; max-width: 1000px; display: flex; justify-content: space-between; padding: 0 22px; }
+        .logo { font-weight: 600; font-size: 17px; cursor: pointer; letter-spacing: -0.02em; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { text-decoration: none; color: var(--text-main); font-size: 12px; opacity: 0.8; cursor: pointer; }
+        .nav-links a:hover { opacity: 1; }
+
+        .view-section { display: none; padding-top: 80px; min-height: 100vh; max-width: 1000px; margin: 0 auto; animation: fadeIn 0.5s ease; }
+        .view-section.active { display: block; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .section-title { font-size: 40px; font-weight: 700; text-align: center; margin: 40px 0; letter-spacing: -0.02em; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; padding: 0 20px; }
+        .card { background: var(--card-bg); border-radius: var(--border-radius); padding: 30px; box-shadow: var(--shadow); cursor: pointer; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08); }
+        .card h3 { font-size: 21px; margin-bottom: 8px; }
+        .card p { color: var(--text-muted); font-size: 14px; }
+
+        .learning-layout { display: flex; gap: 24px; padding: 0 20px; flex-wrap: wrap; margin-bottom: 50px; }
+        .main-reader { flex: 2; min-width: 350px; background: #fff; border-radius: var(--border-radius); padding: 40px; box-shadow: var(--shadow); }
+        .sidebar { flex: 1; min-width: 300px; display: flex; flex-direction: column; gap: 24px; }
+
+        .script-content { font-size: 18px; color: #333; }
+        .script-line { margin-bottom: 25px; border-bottom: 1px dashed #f0f0f0; padding-bottom: 15px; }
+        .role-name { font-weight: 700; color: var(--apple-blue); margin-right: 8px; }
+        .cn-text { font-size: 14px; color: var(--text-muted); display: block; margin-top: 5px; }
+
+        .widget { background: #fff; border-radius: var(--border-radius); padding: 24px; box-shadow: var(--shadow); }
+        .widget h4 { margin-bottom: 16px; font-size: 16px; font-weight: 600; }
+
+        audio { width: 100%; margin: 10px 0; }
+        .btn { background: var(--apple-blue); color: #fff; border: none; padding: 8px 16px; border-radius: 20px; font-size: 13px; cursor: pointer; margin-right: 8px; margin-bottom: 8px; transition: 0.2s; }
+        .btn:hover { opacity: 0.8; }
+        .btn-secondary { background: #f5f5f7; color: var(--apple-blue); }
+
+        /* 挖空与隐藏样式 */
+        .hidden-word { background: #eee; color: transparent; border-radius: 4px; padding: 0 5px; cursor: pointer; transition: 0.2s; }
+        .hidden-word:hover { background: #ddd; }
+        .hidden-word.revealed { background: transparent; color: inherit; }
+
+        #dict-popup { position: absolute; display: none; background: #1d1d1f; color: #fff; padding: 12px 16px; border-radius: 12px; font-size: 14px; z-index: 2000; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); width: 180px; }
+        #dict-popup button { width: 100%; margin-top: 10px; background: var(--apple-blue); border: none; color: white; border-radius: 6px; padding: 5px; cursor: pointer; }
+
+        #vocab-list { list-style: none; margin-top: 10px; max-height: 300px; overflow-y: auto; }
+        .vocab-item { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f0f0; font-size: 14px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-container">
+            <div class="logo" onclick="showView('home')">BLADEFUNNER</div>
+            <div class="nav-links">
+                <a onclick="showView('home')">WHATFUN</a>
+                <a onclick="showView('explore')">EXPLORE</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页 -->
+    <section id="home-view" class="view-section active">
+        <div style="text-align:center;margin-top:15vh;">
+            <h1 style="font-size:64px;letter-spacing:-0.03em;">Learn by heart.</h1>
+            <p style="font-size:24px;color:var(--text-muted);">沉浸式语言学习平台，逐句跟读、美剧学习、生词本练习。</p>
+        </div>
+    </section>
+
+    <!-- 探索页面 -->
+    <section id="explore-view" class="view-section">
+        <h2 class="section-title">探索类目</h2>
+        <div class="grid" id="explore-grid"></div>
+    </section>
+
+    <!-- 英语学习模块 -->
+    <section id="english-view" class="view-section">
+        <h2 class="section-title" id="english-title">英语学习模块</h2>
+        <div class="learning-layout">
+            <div class="main-reader">
+                <h2 id="current-title" style="margin-bottom: 20px;">加载中...</h2>
+                <div id="script-display" class="script-content"></div>
+                <div style="margin-top:30px; border-top: 1px solid #eee; padding-top: 20px;">
+                    <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">模式切换：</p>
+                    <button class="btn" onclick="switchMode('normal')">逐句跟读</button>
+                    <button class="btn btn-secondary" onclick="switchMode('cloze')">挖空听写</button>
+                    <button class="btn btn-secondary" onclick="switchMode('full')">全句隐藏</button>
+                </div>
+            </div>
+
+            <div class="sidebar">
+                <div class="widget">
+                    <h4>听力与跟读</h4>
+                    <audio id="audio-player" controls src=""></audio>
+                    <div style="margin-top:15px;">
+                        <button class="btn" onclick="document.getElementById('audio-player').currentTime = 0">重听本段</button>
+                        <button class="btn btn-secondary">录音跟读</button>
+                    </div>
+                </div>
+                <div class="widget">
+                    <h4>我的生词本</h4>
+                    <ul id="vocab-list"></ul>
+                    <button class="btn btn-secondary" style="width:100%; margin-top:15px;" onclick="clearVocab()">清空单词</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 弹窗 -->
+    <div id="dict-popup">
+        <b id="pop-word">Word</b>
+        <p id="pop-def" style="font-size:12px;opacity:0.8;margin-top:4px;">正在查找...</p>
+        <button onclick="saveWord()">加入生词本</button>
+    </div>
+
+    <script>
+        // ---------------- 1. 数据配置 ----------------
+        const MODULES = [
+            { id: 'english', name: 'ENGLISH', description: '从经典美剧中学习地道口语' },
+            { id: 'french', name: 'FRENCH', description: '法语学习模块敬请期待' },
+            { id: 'ai', name: 'AI STUDY', description: 'AI相关学习模块敬请期待' }
+        ];
+
+        const COURSE_DATA = {
+            "friends_s1e1": {
+                title: "Friends S01E01",
+                audio: "https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3", // 替换为真实音频链接
+                script: [
+                    { role: "Monica", text: "There's nothing to tell! He's just some guy I work with!", cn: "没什么好说的！他只是我同事的一个普通人！" },
+                    { role: "Joey", text: "C'mon, you're going out with the guy! There's gotta be something wrong with him!", cn: "拜托，你居然要跟这个人约会！他一定有问题！" },
+                    { role: "Chandler", text: "All right Joey, be nice. So does he have a hump? A hump and a hairpiece?", cn: "好吧，Joey，要礼貌点。他有驼峰吗？驼峰和假发？" },
+                    { role: "Phoebe", text: "Wait, does he eat chalk?", cn: "等等，他吃粉笔吗？" }
+                ]
+            }
+        };
+
+        const DICT_MOCK = { "hump": "n. 驼峰", "hairpiece": "n. 假发", "chalk": "n. 粉笔" };
+
+        let currentEpisodeId = "friends_s1e1";
+        let currentMode = 'normal';
+
+        // ---------------- 2. 核心视图控制 ----------------
+        function showView(viewId) {
+            document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId + '-view').classList.add('active');
+            if (viewId === 'explore') renderExplore();
+            window.scrollTo(0, 0);
+        }
+
+        function renderExplore() {
+            const grid = document.getElementById('explore-grid');
+            grid.innerHTML = MODULES.map(m => `
+                <div class="card" onclick="${m.id === 'english' ? "loadEpisode('friends_s1e1')" : "alert('即将上线')" }">
+                    <h3>${m.name}</h3>
+                    <p>${m.description}</p>
+                </div>
+            `).join('');
+        }
+
+        function loadEpisode(id) {
+            currentEpisodeId = id;
+            const data = COURSE_DATA[id];
+            document.getElementById('current-title').innerText = data.title;
+            document.getElementById('audio-player').src = data.audio;
+            renderScript();
+            showView('english');
+        }
+
+        // ---------------- 3. 学习模式逻辑 ----------------
+        function switchMode(mode) {
+            currentMode = mode;
+            renderScript();
+        }
+
+        function renderScript() {
+            const display = document.getElementById('script-display');
+            const data = COURSE_DATA[currentEpisodeId];
+            
+            display.innerHTML = data.script.map(line => {
+                let processedText = line.text;
+
+                if (currentMode === 'cloze') {
+                    // 简单的随机挖空逻辑：每句话随机隐藏2个长单词
+                    const words = line.text.split(' ');
+                    processedText = words.map(w => (w.length > 4 && Math.random() > 0.6) ? `<span class="hidden-word" onclick="this.classList.toggle('revealed')">${w}</span>` : w).join(' ');
+                } else if (currentMode === 'full') {
+                    // 全句隐藏
+                    processedText = `<span class="hidden-word" onclick="this.classList.toggle('revealed')">${line.text}</span>`;
+                }
+
+                return `
+                    <div class="script-line">
+                        <span class="role-name">${line.role}:</span>
+                        <span class="en-text">${processedText}</span>
+                        <span class="cn-text">${line.cn}</span>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // ---------------- 4. 划词与生词本 ----------------
+        let selectedWord = "";
+        document.getElementById('script-display').addEventListener('mouseup', (e) => {
+            const sel = window.getSelection().toString().trim().toLowerCase().replace(/[^a-z]/g, '');
+            if (sel.length > 1) {
+                selectedWord = sel;
+                const popup = document.getElementById('dict-popup');
+                document.getElementById('pop-word').innerText = sel.toUpperCase();
+                document.getElementById('pop-def').innerText = DICT_MOCK[sel] || "点击添加手动记录";
+                popup.style.display = 'block';
+                popup.style.left = e.pageX + 'px';
+                popup.style.top = (e.pageY - 80) + 'px';
+            }
+        });
+
+        document.addEventListener('mousedown', (e) => {
+            if (!document.getElementById('dict-popup').contains(e.target)) {
+                document.getElementById('dict-popup').style.display = 'none';
+            }
+        });
+
+        function saveWord() {
+            let vocabs = JSON.parse(localStorage.getItem('bf_v3') || '[]');
+            if (!vocabs.includes(selectedWord)) {
+                vocabs.push(selectedWord);
+                localStorage.setItem('bf_v3', JSON.stringify(vocabs));
+                renderVocab();
+            }
+            document.getElementById('dict-popup').style.display = 'none';
+        }
+
+        function renderVocab() {
+            const list = document.getElementById('vocab-list');
+            const vocabs = JSON.parse(localStorage.getItem('bf_v3') || '[]');
+            list.innerHTML = vocabs.map(w => `<li class="vocab-item"><b>${w}</b> <span>${DICT_MOCK[w] || '已记录'}</span></li>`).join('');
+        }
+
+        function clearVocab() {
+            if(confirm("确定清空吗？")) { localStorage.removeItem('bf_v3'); renderVocab(); }
+        }
+
+        window.onload = () => { renderVocab(); renderExplore(); };
+    </script>
+</body>
+</html>
